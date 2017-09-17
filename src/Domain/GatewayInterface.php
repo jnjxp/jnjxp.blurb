@@ -17,7 +17,7 @@
  * @link      https://github.com/jnjxp/jnjxp.blurb
  */
 
-namespace Jnjxp\Blurb;
+namespace Jnjxp\Blurb\Domain;
 
 /**
  * BlurbGatewayInterface
@@ -28,7 +28,7 @@ namespace Jnjxp\Blurb;
  * @license  http://jnj.mit-license.org/ MIT License
  * @link     http://jakejohns.net
  */
-interface BlurbGatewayInterface
+interface GatewayInterface
 {
 
     /**

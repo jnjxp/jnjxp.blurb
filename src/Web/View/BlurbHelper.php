@@ -17,7 +17,9 @@
  * @link      https://github.com/jnjxp/jnjxp.blurb
  */
 
-namespace Jnjxp\Blurb;
+namespace Jnjxp\Blurb\Web\View;
+
+use Jnjxp\Blurb\Domain\GatewayInterface;
 
 /**
  * BlurbHelper
@@ -48,7 +50,7 @@ class BlurbHelper
      *
      * @access public
      */
-    public function __construct(BlurbGatewayInterface $gateway)
+    public function __construct(GatewayInterface $gateway)
     {
         $this->gateway = $gateway;
     }

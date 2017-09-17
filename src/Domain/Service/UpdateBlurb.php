@@ -17,16 +17,15 @@
  * @link      https://github.com/jnjxp/jnjxp.blurb
  */
 
-namespace Jnjxp\Blurb\Service;
-
-use Jnjxp\Blurb\AbstractBlurbService;
-
-use Aura\Payload_Interface\PayloadStatus as Status;
+namespace Jnjxp\Blurb\Domain\Service;
 
 use Exception;
 
+use Aura\Payload_Interface\PayloadStatus as Status;
+
+
 /**
- * Edit
+ * Update
  *
  * @category Serice
  * @package  Jnjxp\Blurb
@@ -34,39 +33,50 @@ use Exception;
  * @license  http://jnj.mit-license.org/ MIT License
  * @link     http://github.com/jnjxp/jnjxp.blurb
  */
-class Edit extends AbstractBlurbService
+class UpdateBlurb extends AbstractService
 {
 
     /**
      * __invoke
      *
-     * @param mixed $blurb_id DESCRIPTION
+     * @param mixed  $blurb_id DESCRIPTION
+     * @param string $content  DESCRIPTION
      *
      * @return Aura\Payload_Interface\PayloadInterface
      *
      * @access public
      */
-    public function __invoke($blurb_id)
+    public function __invoke($blurb_id, $content)
     {
-        $this->init(['id' => $blurb_id]);
+        $payload = $this->payload()
+            ->setInput(
+                [
+                    'id' => $blurb_id,
+                    'content' => $content
+                ]
+            );
 
         try {
 
-            $blurb = $this->gateway->fetch($blurb_id);
-
-            if (! $blurb) {
-                return $this->notFound($blurb_id);
+            if (! $this->gateway->has($blurb_id)) {
+                return $payload->setStatus(Status::NOT_FOUND);
             }
 
-            $this->payload
-                ->setStatus(Status::SUCCESS)
-                ->setOutput(['blurb' => $blurb]);
+            $blurb = $this->gateway->update($blurb_id, $content);
+
+            if (! $blurb) {
+                throw new Exception('Blurb not Updated!');
+            }
+
+            return $payload
+                ->setStatus(Status::UPDATED)
+                ->setOutput($blurb);
 
         } catch (Exception $exception) {
-            $this->error($exception);
+            return $payload
+                ->setStatus(Status::ERROR)
+                ->setOutput($exception);
         }
-
-        return $this->payload;
     }
 }
 

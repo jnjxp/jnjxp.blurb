@@ -17,16 +17,14 @@
  * @link      https://github.com/jnjxp/jnjxp.blurb
  */
 
-namespace Jnjxp\Blurb\Service;
-
-use Jnjxp\Blurb\AbstractBlurbService;
-
-use Aura\Payload_Interface\PayloadStatus as Status;
+namespace Jnjxp\Blurb\Domain\Service;
 
 use Exception;
 
+use Aura\Payload_Interface\PayloadStatus as Status;
+
 /**
- * Update
+ * GetBlurb
  *
  * @category Serice
  * @package  Jnjxp\Blurb
@@ -34,44 +32,41 @@ use Exception;
  * @license  http://jnj.mit-license.org/ MIT License
  * @link     http://github.com/jnjxp/jnjxp.blurb
  */
-class Update extends AbstractBlurbService
+class GetBlurb extends AbstractService
 {
 
     /**
      * __invoke
      *
-     * @param mixed  $blurb_id DESCRIPTION
-     * @param string $content  DESCRIPTION
+     * @param mixed $blurb_id DESCRIPTION
      *
      * @return Aura\Payload_Interface\PayloadInterface
      *
      * @access public
      */
-    public function __invoke($blurb_id, $content)
+    public function __invoke($blurb_id)
     {
-        $this->init(['id' => $blurb_id, 'content' => $content]);
+
+        $payload = $this->payload();
+        $payload->setInput(['blurb_id' => $blurb_id]);
 
         try {
 
-            if (! $this->gateway->has($blurb_id)) {
-                return $this->notFound($blurb_id);
-            }
-
-            $blurb = $this->gateway->update($blurb_id, $content);
+            $blurb = $this->gateway->fetch($blurb_id);
 
             if (! $blurb) {
-                throw new Exception('Blurb not Updated!');
+                return $payload->setStatus(Status::NOT_FOUND);
             }
 
-            $this->payload
-                ->setStatus(Status::UPDATED)
-                ->setOutput(['blurb' => $blurb]);
+            return $payload
+                ->setStatus(Status::FOUND)
+                ->setOutput($blurb);
 
         } catch (Exception $exception) {
-            $this->error($exception);
+            return $payload
+                ->setStatus(Status::ERROR)
+                ->setOutput($exception);
         }
-
-        return $this->payload;
     }
 }
 

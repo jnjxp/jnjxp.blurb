@@ -17,7 +17,7 @@
  * @link      http://jakejohns.net
  */
 
-namespace Jnjxp\Blurb\Gateway;
+namespace Jnjxp\Blurb\Data;
 
 use Exception;
 

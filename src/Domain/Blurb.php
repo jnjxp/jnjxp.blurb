@@ -17,7 +17,7 @@
  * @link      https://github.com/jnjxp/jnjxp.blurb
  */
 
-namespace Jnjxp\Blurb;
+namespace Jnjxp\Blurb\Domain;
 
 /**
  * Jnjxp\Blurb
@@ -106,5 +106,20 @@ class Blurb
     public function __toString()
     {
         return $this->content;
+    }
+
+    /**
+     * GetArrayCopy
+     *
+     * @return array
+     *
+     * @access public
+     */
+    public function getArrayCopy()
+    {
+        return [
+            'blurb_id' => $this->blurb_id,
+            'content'  => $this->content
+        ];
     }
 }

@@ -17,10 +17,9 @@
  * @link      https://github.com/jnjxp/jnjxp.blurb
  */
 
-namespace Jnjxp\Blurb\Gateway;
+namespace Jnjxp\Blurb\Data;
 
-use Jnjxp\Blurb\BlurbGatewayInterface;
-use Jnjxp\Blurb\Blurb;
+use Jnjxp\Blurb\Domain;
 
 use Exception;
 
@@ -33,7 +32,7 @@ use Exception;
  * @license  http://jnj.mit-license.org/ MIT License
  * @link     https://github.com/jnjxp/jnjxp.blurb
  */
-class FileSystemGateway implements BlurbGatewayInterface
+class FileSystemGateway implements Domain\GatewayInterface
 {
 
     /**
@@ -148,7 +147,7 @@ class FileSystemGateway implements BlurbGatewayInterface
     {
         $path    = $this->filepath($blurb_id);
         $content = $this->fsio->get($path);
-        return new Blurb($blurb_id, $content);
+        return new Domain\Blurb($blurb_id, $content);
     }
 
 }

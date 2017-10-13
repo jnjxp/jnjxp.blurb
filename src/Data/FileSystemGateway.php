@@ -9,7 +9,7 @@
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  *
- * @category  Domain
+ * @category  Data
  * @package   Jnjxp\Blurb
  * @author    Jake Johns <jake@jakejohns.net>
  * @copyright 2016 Jake Johns
@@ -26,7 +26,7 @@ use Exception;
 /**
  * Jnjxp\Blurb
  *
- * @category Domain
+ * @category Data
  * @package  Jnjxp\Blurb
  * @author   Jake Johns <jake@jakejohns.net>
  * @license  http://jnj.mit-license.org/ MIT License
@@ -56,10 +56,8 @@ class FileSystemGateway implements Domain\GatewayInterface
     /**
      * __construct
      *
-     * @param mixed $root DESCRIPTION
-     * @param Fsio  $fsio DESCRIPTION
-     *
-     * @return mixed
+     * @param string $root path to storage
+     * @param Fsio   $fsio fs reader
      *
      * @access public
      */
@@ -72,13 +70,13 @@ class FileSystemGateway implements Domain\GatewayInterface
     /**
      * Filepath
      *
-     * @param mixed $blurb_id DESCRIPTION
+     * @param string $blurb_id blurb identifier
      *
-     * @return mixed
+     * @return string
      *
      * @access protected
      */
-    protected function filepath($blurb_id)
+    protected function filepath(string $blurb_id) : string
     {
         return $this->root . '/' . $blurb_id;
     }
@@ -92,9 +90,10 @@ class FileSystemGateway implements Domain\GatewayInterface
      *
      * @access public
      */
-    public function has($blurb_id)
+    public function has(string $blurb_id) : bool
     {
-        return $this->fsio->exists($this->filepath($blurb_id));
+        $path = $this->filepath($blurb_id);
+        return $this->fsio->exists($path);
     }
 
     /**
@@ -102,14 +101,14 @@ class FileSystemGateway implements Domain\GatewayInterface
      *
      * @param mixed $blurb_id unique blurb id
      *
-     * @return Blurb|array
+     * @return Domain\Blurb
      *
      * @access public
      */
-    public function fetch($blurb_id)
+    public function fetch(string $blurb_id) : Domain\Blurb
     {
         if (!$this->has($blurb_id)) {
-            return null;
+            throw new Domain\Exception\BlurbNotFoundException($blurb_id);
         }
         return $this->load($blurb_id);
     }
@@ -117,18 +116,17 @@ class FileSystemGateway implements Domain\GatewayInterface
     /**
      * Update
      *
-     * @param mixed  $blurb_id unique blurb id
+     * @param string $blurb_id unique blurb id
      * @param string $content  blurb content
      *
-     * @return Blurb
+     * @return Domain\Blurb
      *
      * @access public
      */
-    public function update($blurb_id, $content)
+    public function update(string $blurb_id, string $content) : Domain\Blurb
     {
         if (!$this->has($blurb_id)) {
-            $msg = sprintf('Blurb "%s" not found', $blurb_id);
-            throw new Exception($msg);
+            throw new Domain\Exception\BlurbNotFoundException($blurb_id);
         }
         $this->fsio->put($this->filepath($blurb_id), $content);
         return $this->load($blurb_id);
@@ -137,17 +135,16 @@ class FileSystemGateway implements Domain\GatewayInterface
     /**
      * Load
      *
-     * @param mixed $blurb_id DESCRIPTION
+     * @param string $blurb_id DESCRIPTION
      *
-     * @return mixed
+     * @return Domain\Blurb
      *
      * @access protected
      */
-    protected function load($blurb_id)
+    protected function load(string $blurb_id) : Domain\Blurb
     {
         $path    = $this->filepath($blurb_id);
         $content = $this->fsio->get($path);
         return new Domain\Blurb($blurb_id, $content);
     }
-
 }

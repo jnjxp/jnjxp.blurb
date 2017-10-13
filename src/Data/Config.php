@@ -11,6 +11,8 @@ use Jnjxp\Blurb\Domain;
 class Config extends ContainerConfig
 {
 
+    const ROOT = __NAMESPACE__ . '::ROOT';
+
     /**
      * Define
      *
@@ -25,7 +27,7 @@ class Config extends ContainerConfig
     public function define(Container $di)
     {
         $di->params[FileSystemGateway::class] = [
-            'root' => $di->lazyValue(Root::class),
+            'root' => $di->lazyValue(self::ROOT),
             'fsio' => $di->lazyNew(Fsio::class)
         ];
 

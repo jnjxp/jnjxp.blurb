@@ -20,7 +20,8 @@
     },
     "require-dev":{
         "zendframework/zend-diactoros": "~1.0",
-        "radar/adr":"^1.0"
+        "radar/adr":"^1.0",
+        "phpstan/phpstan": "^0.8.5"
     },
     "autoload": {
         "psr-4": {

@@ -52,7 +52,7 @@ abstract class AbstractService
     /**
      * Gateway
      *
-     * @var Gateway
+     * @var GatewayInterface
      *
      * @access protected
      */

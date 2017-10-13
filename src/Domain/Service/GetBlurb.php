@@ -40,7 +40,7 @@ class GetBlurb extends AbstractService
      *
      * @param mixed $blurb_id DESCRIPTION
      *
-     * @return Aura\Payload_Interface\PayloadInterface
+     * @return \Aura\Payload_Interface\PayloadInterface
      *
      * @access public
      */

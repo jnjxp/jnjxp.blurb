@@ -89,7 +89,7 @@ class AbstractResponder
     public function __invoke(
         Request $request,
         Response $response,
-        PayloadInterface $payload = null
+        PayloadInterface $payload
     ) {
         $this->request  = $request;
         $this->response = $response;
@@ -204,7 +204,7 @@ class AbstractResponder
     {
         $this->response = $this->response
             ->withStatus(404);
-        return $this->viewBody('blurb/not-found');
+        $this->viewBody('blurb/not-found');
     }
 
 }

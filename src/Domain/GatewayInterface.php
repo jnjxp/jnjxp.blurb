@@ -34,34 +34,34 @@ interface GatewayInterface
     /**
      * Has
      *
-     * @param mixed $blurb_id unique blurb id
+     * @param string $blurb_id unique blurb id
      *
      * @return bool
      *
      * @access public
      */
-    public function has($blurb_id);
+    public function has(string $blurb_id) : bool;
 
     /**
      * Fetch
      *
-     * @param mixed $blurb_id unique blurb id
+     * @param string $blurb_id unique blurb id
      *
-     * @return Blurb|array
+     * @return Blurb
      *
      * @access public
      */
-    public function fetch($blurb_id);
+    public function fetch(string $blurb_id) : Blurb;
 
     /**
      * Update
      *
-     * @param mixed  $blurb_id unique blurb id
+     * @param string $blurb_id unique blurb id
      * @param string $content  blurb content
      *
      * @return Blurb
      *
      * @access public
      */
-    public function update($blurb_id, $content);
+    public function update(string $blurb_id, string $content) : Blurb;
 }

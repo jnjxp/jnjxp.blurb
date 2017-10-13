@@ -56,7 +56,7 @@ class Blurb
      *
      * @access public
      */
-    public function __construct($blurb_id, $content)
+    public function __construct(string $blurb_id, string $content)
     {
         $this->blurb_id = $blurb_id;
         $this->content = $content;
@@ -65,9 +65,9 @@ class Blurb
     /**
      * Gets the value of blurb_id
      *
-     * @return blurb_id
+     * @return string
      */
-    public function getBlurbId()
+    public function getBlurbId() : string
     {
         return $this->blurb_id;
     }
@@ -77,7 +77,7 @@ class Blurb
      *
      * @return string
      */
-    public function getContent()
+    public function getContent() : string
     {
         return $this->content;
     }
@@ -91,7 +91,7 @@ class Blurb
      *
      * @access public
      */
-    public function __get($prop)
+    public function __get($prop) : string
     {
         return $this->$prop;
     }
@@ -103,7 +103,7 @@ class Blurb
      *
      * @access public
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->content;
     }
@@ -115,7 +115,7 @@ class Blurb
      *
      * @access public
      */
-    public function getArrayCopy()
+    public function getArrayCopy() : array
     {
         return [
             'blurb_id' => $this->blurb_id,

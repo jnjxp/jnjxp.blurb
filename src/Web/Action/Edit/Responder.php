@@ -9,7 +9,7 @@ class Responder extends AbstractResponder
 {
     protected function found()
     {
-        return $this->viewBody(
+        $this->viewBody(
             'blurb/edit',
             ['blurb' => $this->payload->getOutput()]
         );

@@ -43,7 +43,7 @@ class Config extends ContainerConfig
             $router = $di->get('radar/adr:router');
             $map    = $router->getMap();
             $routes = $di->newInstance(Routes::class);
-            $map->attach(Action::class, '/blurbs', $routes);
+            $map->attach(__NAMESPACE__ . '\\Action', '/blurbs', $routes);
         }
 
         if ($di->has(AuraView::class)) {

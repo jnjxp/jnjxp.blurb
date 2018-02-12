@@ -9,8 +9,6 @@ use Aura\Payload_Interface\PayloadInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-use Vperyod\SessionHandler\SessionRequestAwareTrait;
-
 /**
  *
  * A generic Responder.
@@ -18,8 +16,6 @@ use Vperyod\SessionHandler\SessionRequestAwareTrait;
  */
 class AbstractResponder
 {
-
-    use SessionRequestAwareTrait;
 
     /**
      *
@@ -45,15 +41,6 @@ class AbstractResponder
      *
      */
     protected $response;
-
-    /**
-     * Messages
-     *
-     * @var mixed
-     *
-     * @access protected
-     */
-    protected $messages;
 
     /**
      * View
@@ -105,13 +92,6 @@ class AbstractResponder
         return $this->response;
     }
 
-    protected function messages()
-    {
-        if (! $this->messages) {
-            $this->messages = $this->newMessenger($this->request);
-        }
-        return $this->messages;
-    }
 
     protected function redirect($uri, $status = 302)
     {

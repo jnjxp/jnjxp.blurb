@@ -12,9 +12,6 @@ class Responder extends AbstractResponder
 
     protected function updated()
     {
-        $this->messages()
-            ->success('Updated blurb');
-
         return $this->redirect($this->redirectTo);
     }
 }

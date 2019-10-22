@@ -1,7 +1,7 @@
 <?php
 
 $edit = '';
-if (isset($auth) && $auth->isAuthenticated() && $auth->isAdmin()) {
+if (isset($auth) && $auth->isAuthenticated()) {
     $url = $this->url('blurb.edit', ['blurb_id' => $blurb->getBlurbId()]);
     $edit = $this->ui()->edit($url);
 }

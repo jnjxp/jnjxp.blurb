@@ -14,14 +14,16 @@ $action = $this->url('blurb.edit', ['blurb_id' => $blurb->getBlurbId()]);
 $this->wysiwyg()->instance('textarea');
 ?>
 
-<div class="page-header">
-    <h1><?php echo $this->e($title); ?></h1>
+<div class="container p-5">
+    <div class="page-header">
+        <h1><?php echo $this->e($title); ?></h1>
+    </div>
+
+    <form method="post" action="<?php echo $action; ?>">
+        <textarea name="content" class="form-control">
+            <?php echo $blurb->getContent(); ?>
+        </textarea>
+
+      <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
 </div>
-
-<form method="post" action="<?php echo $action; ?>">
-    <textarea name="content" class="form-control">
-        <?php echo $blurb->getContent(); ?>
-    </textarea>
-
-  <button type="submit" class="btn btn-primary mt-2">Submit</button>
-</form>

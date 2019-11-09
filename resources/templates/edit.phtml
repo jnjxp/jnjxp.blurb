@@ -11,7 +11,9 @@ $this->layout(
 
 $action = $this->url('blurb.edit', ['blurb_id' => $blurb->getBlurbId()]);
 
-$this->wysiwyg()->instance('textarea');
+if ($blurb->getType() == 'html') {
+    $this->wysiwyg()->instance('textarea');
+}
 ?>
 
 <div class="container p-5">

@@ -36,7 +36,7 @@
         "sort-packages": true
     },
     "extra": {
-        "zf": {
+        "laminas": {
             "config-provider": [
                 "Jnjxp\\Blurb\\ConfigProvider"
             ]

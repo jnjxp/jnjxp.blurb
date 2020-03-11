@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Jnjxp\Blurb\Page;
 
-use Zend\Expressive\Application;
+use Mezzio\Application;
 use Jnjxp\Blurb\Handler\DisplayPageHandler;
 
 class PageSettings
@@ -29,12 +29,7 @@ class PageSettings
     public function registerRoutes(Application $app) : void
     {
         $regex = implode('|', array_keys($this->pages));
-
-        $app->route(
-            "/{page:(?:$regex)}",
-            DisplayPageHandler::class,
-            ['GET'],
-            'page'
-        );
+        $path = "/{page:(?:$regex)}";
+        $app->route($path, DisplayPageHandler::class, ['GET'], 'page');
     }
 }

@@ -5,15 +5,12 @@ $title  = 'Edit blurb: ' . $blurb->getBlurbId();
 $this->layout(
     'layout::default',
     [
-       'title' => $title
+        'title' => $title,
+        'wysiwyg' => ($blurb->getType() == 'html') ? '[data-textarea]' : null
     ]
 );
 
 $action = $this->url('blurb.edit', ['blurb_id' => $blurb->getBlurbId()]);
-
-if ($blurb->getType() == 'html') {
-    $this->wysiwyg()->instance('textarea');
-}
 ?>
 
 <div class="container p-5">
@@ -22,7 +19,7 @@ if ($blurb->getType() == 'html') {
     </div>
 
     <form method="post" action="<?php echo $action; ?>">
-        <textarea name="content" class="form-control">
+        <textarea name="content" class="form-control" data-wysiwyg>
             <?php echo $blurb->getContent(); ?>
         </textarea>
 

@@ -10,8 +10,7 @@ class PageSettingsFactory
 {
     public function __invoke(ContainerInterface $container) : PageSettings
     {
-        return new PageSettings(
-            $container->get('config-blurb.pages')
-        );
+        $pages = $container->get('config')['blurb']['pages'] ?? [];
+        return new PageSettings($pages);
     }
 }

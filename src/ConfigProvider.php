@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Jnjxp\Blurb;
 
-use Zend\Expressive\Application;
-use Phly\Expressive\ConfigFactory;
+use Mezzio\Application;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -34,15 +33,13 @@ class ConfigProvider
     {
         return [
             'factories'  => [
-                'config-blurb'                         => ConfigFactory::class,
-                'config-blurb.pages'                   => ConfigFactory::class,
                 Handler\DisplayPageHandler::class      => Handler\DisplayPageHandlerFactory::class,
                 Handler\EditBlurbHandler::class        => Handler\EditBlurbHandlerFactory::class,
                 Mapper\Codec\CodecInterface::class     => Mapper\Codec\CodecStrategyFactory::class,
                 Mapper\MapperInterface::class          => Mapper\MapperFactory::class,
                 Mapper\Storage\StorageInterface::class => Mapper\Storage\FilesystemFactory::class,
-                Page\PageSettings::class                    => Page\PageSettingsFactory::class,
-                View\BlurbViewHelper::class                 => View\BlurbViewHelperFactory::class,
+                Page\PageSettings::class               => Page\PageSettingsFactory::class,
+                View\BlurbViewHelper::class            => View\BlurbViewHelperFactory::class,
             ],
             'aliases' => [
             ],
@@ -64,7 +61,7 @@ class ConfigProvider
     public function registerRoutes(Application $app) : void
     {
         $app->route(
-            '/edit-blurb/{blurb_id}',
+            '/admin/edit-blurb/{blurb_id}',
             Handler\EditBlurbHandler::class,
             ['GET', 'POST'],
             'blurb.edit'

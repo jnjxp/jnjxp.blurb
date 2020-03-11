@@ -7,9 +7,9 @@ namespace Jnjxp\Blurb\Handler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Template\TemplateRendererInterface;
 use Jnjxp\Blurb\Mapper\MapperInterface;
 use Jnjxp\Blurb\BlurbInterface;
 

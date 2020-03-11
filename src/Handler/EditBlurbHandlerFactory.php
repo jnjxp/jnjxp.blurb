@@ -7,8 +7,8 @@ namespace Jnjxp\Blurb\Handler;
 use Jnjxp\Blurb\PageSettings;
 use Jnjxp\Blurb\Mapper\MapperInterface;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Middleware\NotFoundHandler;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Mezzio\Handler\NotFoundHandler;
+use Mezzio\Template\TemplateRendererInterface;
 
 class EditBlurbHandlerFactory
 {

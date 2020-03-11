@@ -3,7 +3,8 @@
 $edit = '';
 if (isset($auth) && $auth->isAuthenticated()) {
     $url = $this->url('blurb.edit', ['blurb_id' => $blurb->getBlurbId()]);
-    $edit = $this->ui()->edit($url);
+    $pattern = '<a href="%s" class="admin-link admin-edit">Edit</a>';
+    $edit = sprintf($pattern, $url);
 }
 
 ?>

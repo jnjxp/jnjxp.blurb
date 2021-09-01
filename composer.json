@@ -1,7 +1,7 @@
 {
     "name": "jnjxp/blurb",
     "description": "Simple static content",
-    "homepage":"https://github.com/jnjxp/jnjxp.blurb",
+    "homepage": "https://github.com/jnjxp/jnjxp.blurb",
     "license": "MIT",
     "authors": [
         {
@@ -12,15 +12,15 @@
     "require": {
         "psr/http-message": "^1.0",
         "aura/payload": "^3.0",
-        "aura/di": "^3.4",
+        "aura/di": "^4.0",
         "aura/view": "^2.3",
         "aura/html": "^2.5",
-        "aura/router": "^3.1"
+        "aura/router": "^3.1",
+        "laminas/laminas-dependency-plugin": "^2.1"
     },
-    "require-dev":{
-        "zendframework/zend-diactoros": "~1.0",
-        "radar/adr":"^1.0",
-        "phpstan/phpstan": "^0.8.5"
+    "require-dev": {
+        "laminas/laminas-diactoros": "~2.0",
+        "radar/adr": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -29,7 +29,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Jnjxp\\Blurb\\":"tests/"
+            "Jnjxp\\Blurb\\": "tests/"
         }
     }
 }
